@@ -180,18 +180,18 @@ class adio(object):
         while True:
             try:
                 temp = self.com.recv()
-                if temp.find(':')==-1: continue
-                else: pass
-                #print temp
-                break
-            except communicator.CommunicatorTimeout:
+                temp1 = temp.decode()
+                if temp.find(b':')==0:
+                    break
+                else:
+                    break
+            except:
                 print('(error) if level')
-                continue
-            continue
-        ch1 = float(temp[7:11])*(5./1024)
-        ch2 = float(temp[13:17])*(5./1024)
-        ch3 = float(temp[19:23])*(5./1024)
-        ch4 = float(temp[25:29])*(5./1024)
+                break
+        ch1 = float(temp1[7:11])*(5./1024)
+        ch2 = float(temp1[13:17])*(5./1024)
+        ch3 = float(temp1[19:23])*(5./1024)
+        ch4 = float(temp1[25:29])*(5./1024)
         self.level = {'ch1':ch1, 'ch2':ch2, 'ch3':ch3, 'ch4':ch4}
         
         self.com.close()
